@@ -1,0 +1,85 @@
+#include<iostream>
+#include<string>
+#include <vector>
+class ToDoList
+{
+private:
+std::string task;
+std::string status;
+public:
+ToDoList(std::string task, std::string status) : task(task), status(status) {}
+std::string getTask() const { return task; }
+std::string getStatus() const { return status; }
+void renew_status(std :: string newstatus)
+{
+status = newstatus;
+}
+};
+int main()
+{
+std::vector<ToDoList> tdl;
+std::string inputtask;
+std::string inputstatus;
+int noTasks;
+bool exit = false;
+std::cout << "Before we start..\n How is the maximum Tasks you may write?\n";
+std::cin >> noTasks;
+std::cin.ignore();
+int choice;
+
+
+do
+{
+std::cout << "Choose what you want to do with your new To-Do-List\n 1)Add\n 2)View\n 3) Delete \n4)Task Status\n 5)Exit \n";
+std::cin >> choice;
+std::cin.ignore();
+switch (choice)
+{
+case 1:
+std::cout << "PLease write your task:" << std::endl;
+if(tdl.size() < noTasks){
+std::getline(std::cin, inputtask);
+inputstatus = "pending";
+
+tdl.push_back(ToDoList(inputtask, inputstatus));
+}
+else
+{
+std::cout << "You have reached the maximum number of Tasks\n";
+}
+break;
+case 2: std::cout << "!.....Viewing the List.....!\n";
+
+for (const auto& ToDoList : tdl)
+{
+
+std::cout << "." << ToDoList.getTask() << " ,(" << ToDoList.getStatus() << ")\n";
+
+
+}
+break;
+case 3:
+int tasknoDel;
+std::cout << "choose the task number you want to Delete:";
+std::cin >> tasknoDel;
+tdl.erase(tdl.begin() + (tasknoDel - 1));
+break;
+case 4 :
+int taskno;
+std::cout << "choose the task number you want to change it status:";
+std::cin >>taskno ;
+std::cout << "Is this task completed or Pending?\n";
+std::cin >> inputstatus;
+tdl[taskno - 1].renew_status(inputstatus);
+break;
+case 5:
+exit = true;
+break;
+default :
+std::cout << "Sorry you insert the wrong number Choose again!\n";
+}
+} while (!exit);
+
+
+return 0;
+}
