@@ -1,0 +1,41 @@
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+using namespace std;
+int main()
+{
+srand(static_cast<unsigned int> (time(0)));
+int secretNum = rand() % 10 + 1;
+int max_guessing = 3;
+cout << "Hello! This is the number guessing game\n please, choose an number from 0 to 10\n You have only 3 guesses so be careful to not waste them\n Goodluck!";
+for (int chances = 1; chances <= max_guessing; chances++)
+{
+int userguess;
+cout << "\nGuess number " << chances << "\n Enter you guess:";
+cin >> userguess;
+if (userguess > 10)
+{
+cout << "\nPlease, Enter numbers from 0 to 10";
+}
+else {
+if (userguess == secretNum)
+{
+cout << "Wow! you guessed right! you guessed on your " << chances << " try!";
+break;
+}
+else if (userguess < secretNum)
+{
+cout << "oops! Try a higher number goodluck \n";
+}
+else if (userguess > secretNum)
+{
+cout << "Sorry! Try a lower number\t";
+}
+}
+}
+cout << "\nThe secert number was:" << secretNum;
+
+
+
+
+return 0;
